@@ -15,7 +15,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table()
+@Table(name="Users")
 public class User {
 
     @jakarta.persistence.Id
@@ -52,16 +52,8 @@ public class User {
     @Column(nullable = false)
     private Boolean is_admin;
 
-    //    @Column(columnDefinition="tinyint(1) default 1")
-
-//    Relations
-//    @OneToOne(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_id")
-//    private Post post;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy="user")
-
-    @JoinColumn(name = "user_id")
+    // One User can have many Posts
+    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts;
 
 }

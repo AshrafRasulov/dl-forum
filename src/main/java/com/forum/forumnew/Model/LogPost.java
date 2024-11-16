@@ -35,7 +35,7 @@ public class LogPost {
     @Enumerated(EnumType.STRING)
     private ActionEnum action;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "CLOB")
     private String body;
 
 }

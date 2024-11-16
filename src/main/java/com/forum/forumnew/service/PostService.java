@@ -20,7 +20,7 @@ public class PostService {
 
         PostResponse response = PostResponse.builder()
             .id(post.getId())
-            .user_id(post.getUser().getId())
+            .user_id(post.getAuthor().getId())
             .title(post.getTitle())
             .content(post.getContent())
             .created(post.getCreated())

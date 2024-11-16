@@ -17,7 +17,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table()
+@Table(name="Posts")
 public class Post {
 
     @jakarta.persistence.Id
@@ -28,7 +28,7 @@ public class Post {
     @Column(nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "CLOB")
     private String content;
 
     @Column(nullable = false)
@@ -40,10 +40,10 @@ public class Post {
     @Column(nullable = false)
     private Boolean status;
 
+    // Many Posts can belong to one User
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User author;
 
-    //Relations
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id", nullable=false)
-    private User user;
 
 }
