@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 
 import java.sql.Timestamp;
-import java.util.List;
 
 
 @Data
@@ -17,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="Posts")
+@Table(name = "FORUM_POSTS")
 public class Post {
 
     @jakarta.persistence.Id

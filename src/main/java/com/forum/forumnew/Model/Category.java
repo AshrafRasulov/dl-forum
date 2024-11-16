@@ -14,7 +14,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table
+@Table(name = "FORUM_CATEGORIES")
 public class Category {
 
     @jakarta.persistence.Id

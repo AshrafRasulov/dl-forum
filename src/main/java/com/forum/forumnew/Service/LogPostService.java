@@ -1,8 +1,8 @@
-package com.forum.forumnew.service;
+package com.forum.forumnew.Service;
 
 import com.forum.forumnew.Model.LogPost;
 import com.forum.forumnew.Utils.ActionEnum;
-import com.forum.forumnew.View.LogPostResponse;
+import com.forum.forumnew.View.Response.LogPostResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

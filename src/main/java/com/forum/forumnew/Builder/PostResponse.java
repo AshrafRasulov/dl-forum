@@ -1,4 +1,4 @@
-package com.forum.forumnew.builder;
+package com.forum.forumnew.Builder;
 import lombok.Builder;
 import lombok.Data;
 import java.time.LocalDateTime;

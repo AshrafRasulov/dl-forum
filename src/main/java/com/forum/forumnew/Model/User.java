@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.Id;
 
 import java.sql.Timestamp;
@@ -15,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(name="Users")
+@Table(name="FORUM_USERS")
 public class User {
 
     @jakarta.persistence.Id
@@ -33,15 +34,16 @@ public class User {
     private String password;
 
     @Column(nullable = false)
-    private String first_name;
+    private String firstName;
 
     @Column(nullable = false)
-    private String last_name;
+    private String lastName;
 
     @Column(nullable = false)
-    private String middle_name;
+    private String middleName;
 
     @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     private Timestamp created;
 
 
@@ -50,7 +52,7 @@ public class User {
 
 
     @Column(nullable = false)
-    private Boolean is_admin;
+    private Boolean isAdmin;
 
     // One User can have many Posts
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)

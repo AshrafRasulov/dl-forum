@@ -1,7 +1,7 @@
-package com.forum.forumnew.controller;
+package com.forum.forumnew.Controller;
 
-import com.forum.forumnew.View.MessageResponse;
-import com.forum.forumnew.service.MessageService;
+import com.forum.forumnew.View.Response.MessageResponse;
+import com.forum.forumnew.Service.MessageService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

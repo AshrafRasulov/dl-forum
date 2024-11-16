@@ -1,7 +1,7 @@
-package com.forum.forumnew.service;
+package com.forum.forumnew.Service;
 
 import com.forum.forumnew.Model.Message;
-import com.forum.forumnew.View.MessageResponse;
+import com.forum.forumnew.View.Response.MessageResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.sql.Timestamp;

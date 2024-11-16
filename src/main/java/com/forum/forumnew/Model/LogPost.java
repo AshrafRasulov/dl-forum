@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table
+@Table(name = "FORUM_LOG_POSTS")
 public class LogPost {
 
     @jakarta.persistence.Id

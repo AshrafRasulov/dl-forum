@@ -1,4 +1,4 @@
-package com.forum.forumnew.View;
+package com.forum.forumnew.View.Response;
 
 import com.forum.forumnew.Utils.ActionEnum;
 import lombok.Builder;

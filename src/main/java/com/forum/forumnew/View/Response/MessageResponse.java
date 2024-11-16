@@ -1,17 +1,16 @@
-package com.forum.forumnew.View;
+package com.forum.forumnew.View.Response;
 
 import lombok.Builder;
 import lombok.Data;
-
 import java.sql.Timestamp;
 
 @Data
 @Builder
-public class CategoryResponse {
+public class MessageResponse {
     private Long id;
     private Long user_id;
-    private String name;
-    private String slug;
+    private Long  post_id;
+    private String content;
     private Timestamp created;
-    private Boolean status;
+    private Long status;
 }

@@ -1,7 +1,7 @@
-package com.forum.forumnew.controller;
+package com.forum.forumnew.Controller;
 
-import com.forum.forumnew.View.CategoryResponse;
-import com.forum.forumnew.service.CategoryService;
+import com.forum.forumnew.View.Response.CategoryResponse;
+import com.forum.forumnew.Service.CategoryService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
