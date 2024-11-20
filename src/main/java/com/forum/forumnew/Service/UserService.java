@@ -8,6 +8,7 @@ import com.forum.forumnew.View.Response.ListUserResponse;
 import com.forum.forumnew.View.Response.UserResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -41,7 +42,6 @@ public class UserService {
         .firstName(user.getFirstName())
         .lastName(user.getLastName())
         .middleName(user.getMiddleName())
-        .created(user.getCreated())
         .status(user.getStatus())
         .isAdmin(user.getIsAdmin())
         .build();
@@ -115,17 +115,16 @@ public class UserService {
 
   //Remove User
   public String deleteUserById(Long id) {
-    final String[] info = {"User is not exist"};
-    final List<User> users = repository.findAll().stream().toList();
-    users.forEach(user -> {
-      if (user.getId() != null)
-      {
-        repository.deleteById(id);
-        info[0] = "User was removed";
-      }
-    });
+    String info = "User does not exist";
+    User defaultUser = new User();
+    final User user = repository.findById(id)
+        .orElse(defaultUser);
+    if (user.getId() != null) {
+      info = "User was removed";
+      repository.deleteById(id);
+    }
 
-    return "User is not exist";
+    return info;
   }
 
 

@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.Id;
 
 import java.sql.Timestamp;
@@ -44,7 +45,14 @@ public class User {
 
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
+    @Column(updatable = false, nullable = false)
     private Timestamp created;
+
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(updatable = true, nullable = true)
+    @UpdateTimestamp
+    private Timestamp edited;
 
 
     @Column(nullable = false)
