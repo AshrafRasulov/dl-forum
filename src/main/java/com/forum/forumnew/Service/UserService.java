@@ -8,7 +8,6 @@ import com.forum.forumnew.View.Response.ListUserResponse;
 import com.forum.forumnew.View.Response.UserResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,37 +19,48 @@ public class UserService {
 
   public UserResponse AddNewUser(UserCreateRequest userRequest) {
     User user = new User();
-    if (userRequest.getId() != null)
-      user.setId(userRequest.getId());
-
-    user.setUsername(userRequest.getUsername());
-    user.setEmail(userRequest.getEmail());
-    user.setIsAdmin(userRequest.getIsAdmin());
-    user.setPassword(userRequest.getPassword());
-    user.setFirstName(userRequest.getFirstName());
-    user.setLastName(userRequest.getLastName());
-    user.setMiddleName(userRequest.getMiddleName());
-    user.setStatus(userRequest.getStatus());
+    try {
 
 
-    repository.save(user);
-    UserDTO dto = UserDTO.builder()
-        .id(user.getId())
-        .username(user.getUsername())
-        .email(user.getEmail())
-        .password(user.getPassword())
-        .firstName(user.getFirstName())
-        .lastName(user.getLastName())
-        .middleName(user.getMiddleName())
-        .status(user.getStatus())
-        .isAdmin(user.getIsAdmin())
-        .build();
+      if (userRequest.getId() != null)
+        user.setId(userRequest.getId());
 
-    UserResponse response = UserResponse.builder()
-        .user(dto)
-        .success(true)
-        .build();
-    return response;
+      user.setUsername(userRequest.getUsername());
+      user.setEmail(userRequest.getEmail());
+      user.setIsAdmin(userRequest.getIsAdmin());
+      user.setPassword(userRequest.getPassword());
+      user.setFirstName(userRequest.getFirstName());
+      user.setLastName(userRequest.getLastName());
+      user.setMiddleName(userRequest.getMiddleName());
+      user.setStatus(userRequest.getStatus());
+
+
+      repository.save(user);
+      UserDTO dto = UserDTO.builder()
+              .id(user.getId())
+              .username(user.getUsername())
+              .email(user.getEmail())
+              .password(user.getPassword())
+              .firstName(user.getFirstName())
+              .lastName(user.getLastName())
+              .middleName(user.getMiddleName())
+              .created(user.getCreated())
+              .status(user.getStatus())
+              .isAdmin(user.getIsAdmin())
+              .build();
+
+      UserResponse response = UserResponse.builder()
+              .user(dto)
+              .message("success")
+              .success(true)
+              .build();
+      return response;
+    } catch (Exception e){
+      return  UserResponse.builder()
+              .message(e.getMessage())
+              .success(false)
+              .build();
+    }
   }
 
   //Get User By Id
@@ -86,45 +96,46 @@ public class UserService {
     try {
       List<User> users = repository.findAll();
       List<UserDTO> useDTOS = users.stream()
-          .map(user -> UserDTO.builder()  // Assuming UserDTO has a builder pattern
-              .id(user.getId())
-              .username(user.getUsername())
-              .email(user.getEmail())
-              .password(user.getPassword())
-              .firstName(user.getFirstName())
-              .lastName(user.getLastName())
-              .middleName(user.getMiddleName())
-              .created(user.getCreated())
-              .status(user.getStatus())
-              .isAdmin(user.getIsAdmin())
-              .build())
-          .toList();
+        .map(user -> UserDTO.builder()  // Assuming UserDTO has a builder pattern
+          .id(user.getId())
+          .username(user.getUsername())
+          .email(user.getEmail())
+          .password(user.getPassword())
+          .firstName(user.getFirstName())
+          .lastName(user.getLastName())
+          .middleName(user.getMiddleName())
+          .created(user.getCreated())
+          .status(user.getStatus())
+          .isAdmin(user.getIsAdmin())
+          .build())
+        .toList();
 
       return ListUserResponse.builder()
-          .users(useDTOS)
-          .message("success")
-          .success(true)
-          .build();
+        .users(useDTOS)
+        .message("success")
+        .success(true)
+        .build();
     } catch (Exception e) {
       return ListUserResponse.builder()
-          .message(e.getMessage())
-          .success(false)
-          .build();
+        .message(e.getMessage())
+        .success(false)
+        .build();
     }
   }
 
   //Remove User
   public String deleteUserById(Long id) {
-    String info = "User does not exist";
-    User defaultUser = new User();
-    final User user = repository.findById(id)
-        .orElse(defaultUser);
-    if (user.getId() != null) {
-      info = "User was removed";
-      repository.deleteById(id);
-    }
+    final String[] info = {"User is not exist"};
+    final List<User> users = repository.findAll().stream().toList();
+    users.forEach(user -> {
+      if (user.getId() != null)
+      {
+        repository.deleteById(id);
+        info[0] = "User was removed";
+      }
+    });
 
-    return info;
+    return "User is not exist";
   }
 
 

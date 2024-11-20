@@ -54,10 +54,8 @@ public class User {
     @UpdateTimestamp
     private Timestamp edited;
 
-
     @Column(nullable = false)
     private Boolean status;
-
 
     @Column(nullable = false)
     private Boolean isAdmin;

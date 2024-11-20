@@ -20,7 +20,7 @@ public class UserController {
   private UserService userService;
 
 
-  @PostMapping(value = "adduser")
+  @PostMapping(value = "")
   public UserResponse AddUser(@RequestBody UserCreateRequest userRequest) {
     return userService.AddNewUser(userRequest);
   }
@@ -31,7 +31,7 @@ public class UserController {
   }
 
   @GetMapping("all")
-  public ListUserResponse getAllUsersa(){
+  public ListUserResponse getAllUser(){
     return userService.getAllUsers();
   }
 
