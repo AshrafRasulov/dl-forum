@@ -13,6 +13,4 @@ public class PostResponse {
     private LocalDateTime created;
     private Long categoryId;
     private String status;
-
-
 }

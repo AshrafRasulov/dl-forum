@@ -8,7 +8,6 @@ import com.forum.forumnew.View.Response.ListUserResponse;
 import com.forum.forumnew.View.Response.UserResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -18,11 +17,10 @@ import java.util.stream.Collectors;
 public class UserService {
   private final UserRepository repository;
 
-  public UserResponse ServIt(UserCreateRequest userRequest) {
+  public UserResponse AddNewUser(UserCreateRequest userRequest) {
     User user = new User();
     if (userRequest.getId() != null)
       user.setId(userRequest.getId());
-
 
     user.setUsername(userRequest.getUsername());
     user.setEmail(userRequest.getEmail());
@@ -55,6 +53,7 @@ public class UserService {
     return response;
   }
 
+  //Get User By Id
   public UserResponse getUserById(long id) {
     User user = new User();
 
@@ -82,7 +81,7 @@ public class UserService {
         .build();
   }
 
-
+  //Get All Users
   public ListUserResponse getAllUsers() {
     try {
       List<User> users = repository.findAll();
@@ -91,6 +90,13 @@ public class UserService {
               .id(user.getId())
               .username(user.getUsername())
               .email(user.getEmail())
+              .password(user.getPassword())
+              .firstName(user.getFirstName())
+              .lastName(user.getLastName())
+              .middleName(user.getMiddleName())
+              .created(user.getCreated())
+              .status(user.getStatus())
+              .isAdmin(user.getIsAdmin())
               .build())
           .toList();
 
@@ -106,4 +112,21 @@ public class UserService {
           .build();
     }
   }
+
+  //Remove User
+  public String deleteUserById(Long id) {
+    final String[] info = {"User is not exist"};
+    final List<User> users = repository.findAll().stream().toList();
+    users.forEach(user -> {
+      if (user.getId() != null)
+      {
+        repository.deleteById(id);
+        info[0] = "User was removed";
+      }
+    });
+
+    return "User is not exist";
+  }
+
+
 }
