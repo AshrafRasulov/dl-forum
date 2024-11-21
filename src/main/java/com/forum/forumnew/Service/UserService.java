@@ -49,12 +49,11 @@ public class UserService {
               .isAdmin(user.getIsAdmin())
               .build();
 
-      UserResponse response = UserResponse.builder()
+      return UserResponse.builder()
               .user(dto)
               .message("success")
               .success(true)
               .build();
-      return response;
     } catch (Exception e){
       return  UserResponse.builder()
               .message(e.getMessage())
@@ -125,18 +124,18 @@ public class UserService {
 
   //Remove User
   public String deleteUserById(Long id) {
-    final String[] info = {"User is not exist"};
-    final List<User> users = repository.findAll().stream().toList();
-    users.forEach(user -> {
-      if (user.getId() != null)
-      {
-        repository.deleteById(id);
-        info[0] = "User was removed";
-      }
-    });
+    String info = "User does not exist";
+    User defaultUser = new User();
+    final User user = repository.findById(id)
+        .orElse(defaultUser);
+    if (user.getId() != null) {
+      info = "User was removed";
+      repository.deleteById(id);
+    }
 
-    return "User is not exist";
+    return info;
   }
+
 
 
 }
